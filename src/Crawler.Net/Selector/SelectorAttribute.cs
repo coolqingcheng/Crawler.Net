@@ -11,14 +11,14 @@ namespace Crawler.Net.Selector
     public class SelectorAttribute : Attribute
     {
         /// <summary>
-        /// xpath解析 1
+        /// css表达式
         /// </summary>
-        public string Xpath { get; set; }
+        public string Query { get; set; }
 
         /// <summary>
         /// 正则表达式 2
         /// </summary>
-        public string Rex { get; set; }
+        public string Att { get; set; }
 
         /// <summary>
         /// 是否是列表
@@ -53,26 +53,37 @@ namespace Crawler.Net.Selector
         /// <summary>
         /// 解析方式，默认是Xpath
         /// </summary>
-        public ParseType parseType { get; set; } = ParseType.Xpath;
+        public ParseType parseType { get; set; } = ParseType.CssQuery;
     }
 
     public enum ParseType
     {
         /// <summary>
-        /// 用xpath解析
-        /// </summary>
-        Xpath = 0,
-
-        /// <summary>
         /// 用正则表达式解析
         /// </summary>
-        Rex = 1
+        Rex = 1,
+
+        /// <summary>
+        /// css选择器
+        /// </summary>
+        CssQuery = 2
     }
 
     public enum SelectType
     {
+        /// <summary>
+        /// 纯文本
+        /// </summary>
         TEXT = 0,
 
-        HTML = 1
+        /// <summary>
+        /// html代码
+        /// </summary>
+        HTML = 1,
+        
+        /// <summary>
+        /// 抓取某个属性
+        /// </summary>
+        Attribute = 2
     }
 }

@@ -10,6 +10,7 @@ using Crawler.Net.Storage;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -29,10 +30,6 @@ namespace Crawler.Net
         /// </summary>
         public string AllowHost { get; set; } = "*";
 
-        /// <summary>
-        /// 日志组件
-        /// </summary>
-        protected ILogger _logger;
 
         /// <summary>
         /// 获取配置
@@ -104,7 +101,7 @@ namespace Crawler.Net
             {
                 if (AllowHost != "*" && request.Url.Contains(AllowHost) == false)
                 {
-                    _logger.LogError($"URL:{request.Url} 不在允许的域名内！");
+                    Log.Error($"URL:{request.Url} 不在允许的域名内！");
                     return;
                 }
                 using var scope = serviceProvider.CreateScope();
@@ -112,7 +109,7 @@ namespace Crawler.Net
                 if (await task.CheckExistAsync(request.Url) == false)
                 {
                     //验证是否已经采集过了
-                    _logger.LogInformation("添加URL:" + request.Url + $"[{request.Url}]");
+                    Log.Information("添加URL:" + request.Url + $"[{request.Url}]");
                     //todo 验证是否已经存在任务库中，如果存在，那么不添加
                     if (_requestQueue.Where(a => a.Url == request.Url).Any() == false)
                     {
@@ -133,19 +130,19 @@ namespace Crawler.Net
                 }
                 else
                 {
-                    //_logger.LogInformation($"当前URL:{request.Url}已经采集了，不加入队列");
+                    //Log.Information($"当前URL:{request.Url}已经采集了，不加入队列");
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "添加URL到请求队列失败！");
+                Log.Error(ex, "添加URL到请求队列失败！");
             }
         }
 
 
-        private Action<SpiderResponse> callback;
+        private Func<SpiderResponse, Task> callback;
 
-        public void SetCallBack(Action<SpiderResponse> action)
+        public void SetCallBack(Func<SpiderResponse, Task> action)
         {
             callback = action;
         }
@@ -182,7 +179,7 @@ namespace Crawler.Net
             var reqnum = _config.GetSection("spider:reqnum").Value.ToInt();
             var respnum = _config.GetSection("spider:respnum").Value.ToInt();
             var puase = _config.GetSection("spider:puase").Value.ToInt();
-            _logger.LogInformation($"当前的速度.请求:{reqnum} 响应:{respnum}");
+            Log.Information($"当前的速度.请求:{reqnum} 响应:{respnum}");
             this._requestQueueSpeedController.SetMaxSpeed(reqnum);
             this._responseQueueSpeedController.SetMaxSpeed(respnum);
             this._taskHz = puase;
@@ -216,8 +213,7 @@ namespace Crawler.Net
             services.AddScoped<ICrawlerSelector, CrawlerSelector>();
             serviceProvider = services.BuildServiceProvider();
             status = SpiderStatus.Running;
-            _logger = serviceProvider.GetRequiredService<ILogger<CrawlerNet>>();
-            _logger.LogInformation("爬虫开始启动");
+            Log.Information("爬虫开始启动");
             this.SetSpeed();
             await StartSpider();
             await WaitForExisting();
@@ -246,7 +242,7 @@ namespace Crawler.Net
 
                 if (quit)
                 {
-                    _logger.LogInformation("检查状态完成，爬虫退出");
+                    Log.Information("检查状态完成，爬虫退出");
                     break;
                 }
             }
@@ -260,17 +256,6 @@ namespace Crawler.Net
         {
             await Task.CompletedTask;
         }
-
-        /// <summary>
-        /// 解析出数据
-        /// </summary>
-        /// <param name="response"></param>
-        /// <returns></returns>
-        public virtual async Task ParseItem(SpiderResponse response)
-        {
-            await Task.CompletedTask;
-        }
-
         /// <summary>
         /// 开始爬虫
         /// </summary>
@@ -291,7 +276,7 @@ namespace Crawler.Net
         /// <returns></returns>
         public async Task RunScheduler()
         {
-            _logger.LogInformation("任务调度器开始运行...");
+            Log.Information("任务调度器开始运行...");
             //取出任务列表加到下载队列中
 
             //从下载队列遍历数据，然后开始请求数据
@@ -304,27 +289,27 @@ namespace Crawler.Net
                     {
                         if (_requestQueueSpeedController.GetFullLoadStatus())
                         {
-                            _logger.LogInformation($"下载任务已经达到了上限，稍后再试！先暂停:{_taskHz} 队列中一共:{_requestQueue.Count()}条数据");
+                            Log.Information($"下载任务已经达到了上限，稍后再试！先暂停:{_taskHz} 队列中一共:{_requestQueue.Count()}条数据");
                             await Task.Delay(_taskHz);
                             continue;
                         }
                         if (_requestQueue.TryDequeue(out var req))
                         {
-                            _logger.LogInformation($"当前队列还剩下:{_requestQueue.Count()}");
+                            Log.Information($"当前队列还剩下:{_requestQueue.Count()}");
                             SpiderRequest request = req;
                             _ = Task.Factory.StartNew(async () =>
                             {
                                 using var scope = serviceProvider.CreateScope();
                                 try
                                 {
-                                    _logger.LogInformation($"下载html:{request.Url}");
+                                    Log.Information($"下载html:{request.Url}");
                                     //检查是否下载任务已经满了
 
                                     //检查下载任务已经下载过了
                                     var task = scope.ServiceProvider.GetRequiredService<ITask>();
                                     if (await task.CheckExistAsync(req.Url))
                                     {
-                                        _logger.LogInformation("当前URL已经下载过了，不进行再次下载");
+                                        Log.Information("当前URL已经下载过了，不进行再次下载");
                                         return;
                                     }
                                     if (_requestQueueSpeedController.GetFullLoadStatus())
@@ -360,7 +345,7 @@ namespace Crawler.Net
                                 }
                                 catch (Exception ex)
                                 {
-                                    _logger.LogError(ex, "下载文件队列异常！");
+                                    Log.Error(ex, "下载文件队列异常！");
                                     //抛出异常后，重新添加到请求列表
                                     _requestQueueSpeedController.Sub();
                                     if (request.ReTryTimes <= 3)
@@ -383,7 +368,7 @@ namespace Crawler.Net
                         else
                         {
                             //如果请求队列中没有数据了，那么从本地数据库抓取数据
-                            _logger.LogInformation("请求队列中么有数据了，从本地数据库抓取");
+                            Log.Information("请求队列中么有数据了，从本地数据库抓取");
                             var task = reqscope.ServiceProvider.GetRequiredService<ITask>();
                             var list = await task.TakeTaskAsync(100);
                             if (list != null && list.Count() > 0)
@@ -401,7 +386,7 @@ namespace Crawler.Net
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogError(ex, "没有拦截到的错误【429】");
+                        Log.Error(ex, "没有拦截到的错误【429】");
                     }
                     await Task.Delay(_taskHz);
                 }
@@ -415,7 +400,7 @@ namespace Crawler.Net
                     {
                         if (_responseQueueSpeedController.GetFullLoadStatus())
                         {
-                            _logger.LogInformation($"当前速度已经满载！response队列剩余:{_responseQueue.Count()} 下载队列剩余:{_requestQueue.Count()}");
+                            Log.Information($"当前速度已经满载！response队列剩余:{_responseQueue.Count()} 下载队列剩余:{_requestQueue.Count()}");
                             await Task.Delay(_taskHz);
                             continue;
                         }
@@ -436,7 +421,7 @@ namespace Crawler.Net
                                         //await ParseItem(response);
                                         if (callback != null)
                                         {
-                                            callback(response);
+                                            await callback(response);
                                         }
                                         _responseQueueSpeedController.Sub();
                                         //把当前URL存储本地
@@ -448,7 +433,7 @@ namespace Crawler.Net
                                     }
                                     catch (Exception ex)
                                     {
-                                        _logger.LogError(ex, $"解析或保存数据错误:{response.Request.Url}");
+                                        Log.Error(ex, $"解析或保存数据错误:{response.Request.Url}");
                                         _responseQueueSpeedController.Sub();
                                         if (response.Request.IfSave)
                                         {
@@ -458,14 +443,14 @@ namespace Crawler.Net
                                 }
                                 catch (Exception ex)
                                 {
-                                    scope.ServiceProvider.GetService<ILogger>().LogError(ex, "写入到ParseItem错误！");
+                                    Log.Error(ex, "写入到ParseItem错误！");
                                 }
                             });
                         }
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogError(ex, "没有拦截到的错误【490】");
+                        Log.Error(ex, "没有拦截到的错误【490】");
                     }
                     await Task.Delay(_taskHz);
                 }

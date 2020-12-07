@@ -1,8 +1,11 @@
-﻿using HtmlAgilityPack;
+﻿using AngleSharp.Dom;
+using AngleSharp.Html.Parser;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -18,20 +21,21 @@ namespace Crawler.Net.Selector
             {
                 return null;
             }
-            var doc = new HtmlDocument();
-            doc.LoadHtml(html);
+            var parser = new HtmlParser();
+            var doc = parser.ParseDocument(html);
             //移除注释
-            //移除注释
-            var comments = doc.DocumentNode.SelectNodes("//comment()");
+
+            var comments = doc.Descendents<IComment>();
             if (comments != null)
             {
+                var c = comments.Select(a => a.TextContent).ToList();
                 foreach (var item in comments)
                 {
                     item.Remove();
                 }
             }
             //移除script
-            var scripts = doc.DocumentNode.Descendants("script").ToArray();
+            var scripts = doc.QuerySelectorAll("script");
             if (scripts != null)
             {
                 foreach (var item in scripts)
@@ -40,7 +44,7 @@ namespace Crawler.Net.Selector
                 }
             }
             //移除iframe
-            var iframes = doc.DocumentNode.Descendants("iframe").ToArray();
+            var iframes = doc.QuerySelectorAll("iframe");
             if (iframes != null)
             {
                 foreach (var item in iframes)
@@ -51,11 +55,11 @@ namespace Crawler.Net.Selector
             foreach (var item in properties)
             {
                 var att = item.GetCustomAttribute<SelectorAttribute>();
-                if (att != null && att.parseType == ParseType.Xpath)
+                if (att != null && att.parseType == ParseType.CssQuery)
                 {
                     if (att.selectType == SelectType.HTML || att.GetAllImage)
                     {
-                        var contentNode = doc.DocumentNode.SelectSingleNode(att.Xpath);
+                        var contentNode = doc.QuerySelector(att.Query);
 
                         var htmlstr = contentNode?.InnerHtml;
                         if (att.Replace != null && att.Replace.Length == 2)
@@ -68,7 +72,7 @@ namespace Crawler.Net.Selector
                         {
                             foreach (var temp in att?.ReplaceTagToTxt)
                             {
-                                var tags = contentNode.Descendants(temp);
+                                var tags = contentNode.QuerySelectorAll(temp);
                                 foreach (var tag in tags)
                                 {
                                     var outer = tag.OuterHtml;
@@ -77,21 +81,12 @@ namespace Crawler.Net.Selector
                                 }
                             }
                         }
-                        if (att.GetAllImage)
-                        {
-                            var nodes = doc.DocumentNode.SelectSingleNode(att.Xpath)?.Descendants("img");
-                            if (nodes != null)
-                            {
-                                var imgs = string.Join(",", nodes.Select(a => a.GetAttributeValue("src", "")));
-                                item.SetValue(t, imgs);
-                            }
-                        }
 
                         item.SetValue(t, htmlstr?.Trim());
                     }
                     else
                     {
-                        var text = doc.DocumentNode.SelectSingleNode(att.Xpath)?.InnerText;
+                        var text = doc.QuerySelector(att.Query)?.TextContent;
                         if (att.Replace != null && att.Replace.Length == 2)
                         {
                             text = text.Replace(att.Replace[0], att.Replace[1]);
@@ -99,9 +94,6 @@ namespace Crawler.Net.Selector
                         text = text?.Trim();
                         item.SetValue(t, text);
                     }
-                }
-                else
-                {
                 }
             }
             return t;
@@ -115,9 +107,81 @@ namespace Crawler.Net.Selector
             {
                 return null;
             }
-            var doc = new HtmlDocument();
-            doc.LoadHtml(html);
-            //todo 没有实现
+            var parser = new HtmlParser();
+            var doc = parser.ParseDocument(html);
+            var querys = properties.Select(a => new
+            {
+                a.Name,
+                att = a.GetCustomAttribute<SelectorAttribute>()
+            });
+
+            var table = new Dictionary<string, List<string>>();
+
+            foreach (var item in querys)
+            {
+
+                var propertyInfo = typeof(T).GetType().GetProperty(item.Name);
+                var tmps = doc.QuerySelectorAll(item.att.Query);
+                var att = item.att;
+                var tableCol = new List<string>();
+                foreach (var tmp in tmps)
+                {
+                    if (item.att.selectType == SelectType.HTML)
+                    {
+
+                        var htmlstr = tmp.InnerHtml;
+                        if (att.Replace != null && att.Replace.Length == 2)
+                        {
+                            htmlstr = htmlstr.Replace(att.Replace[0], att.Replace[1]);
+                        }
+
+                        // todo 替换某些标签为文字
+                        if (att.ReplaceTagToTxt != null)
+                        {
+                            foreach (var temp in att?.ReplaceTagToTxt)
+                            {
+                                var tags = tmp.QuerySelectorAll(temp);
+                                foreach (var tag in tags)
+                                {
+                                    var outer = tag.OuterHtml;
+                                    var inner = tag.InnerHtml;
+                                    htmlstr = htmlstr.Replace(outer, inner);
+                                }
+                            }
+                        }
+                        tableCol.Add(tmp.InnerHtml);
+                    }
+                    else if (item.att.selectType == SelectType.TEXT)
+                    {
+                        tableCol.Add(tmp.TextContent);
+                    }
+                    else if (item.att.selectType == SelectType.Attribute)
+                    {
+                        tableCol.Add(tmp.GetAttribute(item.att.Att));
+                    }
+                }
+
+                table.TryAdd(item.Name, tableCol);
+            }
+
+            //获取最长的条数
+            int size = table.Select(a => a.Value.Count()).Max();
+            for (int i = 0; i < size; i++)
+            {
+                var t = new T();
+                foreach (var property in properties)
+                {
+
+                    var col = table[property.Name];
+                    if (col.Count() >= i)
+                    {
+                        t.GetType().GetProperty(property.Name).SetValue(t, col[i]);
+                    }
+                }
+                list.Add(t);
+            }
+
+
 
             return list;
         }
@@ -128,4 +192,5 @@ namespace Crawler.Net.Selector
             return list;
         }
     }
+
 }

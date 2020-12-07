@@ -61,8 +61,8 @@ C:\Users\cx\Desktop\github\Crawler.Net\src\Example\bin\Debug\netcoreapp3.1\Zstan
 C:\Users\cx\Desktop\github\Crawler.Net\src\Example\bin\Debug\netcoreapp3.1\Renci.SshNet.dll
 C:\Users\cx\Desktop\github\Crawler.Net\src\Example\bin\Debug\netcoreapp3.1\SshNet.Security.Cryptography.dll
 C:\Users\cx\Desktop\github\Crawler.Net\src\Example\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
-C:\Users\cx\Desktop\github\Crawler.Net\src\Example\bin\Debug\netcoreapp3.1\Crawler.Storage.dll
-C:\Users\cx\Desktop\github\Crawler.Net\src\Example\bin\Debug\netcoreapp3.1\Crawler.Storage.pdb
-C:\Users\cx\Desktop\github\Crawler.Net\src\Example\bin\Debug\netcoreapp3.1\Crawler.Entity.dll
-C:\Users\cx\Desktop\github\Crawler.Net\src\Example\bin\Debug\netcoreapp3.1\Crawler.Entity.pdb
 C:\Users\cx\Desktop\github\Crawler.Net\src\Example\bin\Debug\netcoreapp3.1\crawler.json
+C:\Users\cx\Desktop\github\Crawler.Net\src\Example\bin\Debug\netcoreapp3.1\Serilog.dll
+C:\Users\cx\Desktop\github\Crawler.Net\src\Example\bin\Debug\netcoreapp3.1\Serilog.Extensions.Logging.dll
+C:\Users\cx\Desktop\github\Crawler.Net\src\Example\bin\Debug\netcoreapp3.1\Serilog.Sinks.Console.dll
+C:\Users\cx\Desktop\github\Crawler.Net\src\Example\bin\Debug\netcoreapp3.1\Serilog.Sinks.File.dll

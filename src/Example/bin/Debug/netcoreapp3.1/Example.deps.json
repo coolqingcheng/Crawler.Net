@@ -8,9 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "Example/1.0.0": {
         "dependencies": {
-          "Crawler.Entity": "1.0.0",
-          "Crawler.Net": "1.0.0",
-          "Crawler.Storage": "1.0.0",
+          "Crawler.Net": "0.0.1",
           "FreeSql": "2.0.103",
           "FreeSql.Provider.MySql": "2.0.103"
         },
@@ -496,6 +494,54 @@
       "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
+      "Serilog/2.10.0": {
+        "runtime": {
+          "lib/netstandard2.1/Serilog.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.10.0.0"
+          }
+        }
+      },
+      "Serilog.Extensions.Logging/3.0.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging": "5.0.0",
+          "Serilog": "2.10.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Serilog.Extensions.Logging.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "3.0.1.0"
+          }
+        }
+      },
+      "Serilog.Sinks.Console/3.1.1": {
+        "dependencies": {
+          "Serilog": "2.10.0",
+          "System.Console": "4.3.0",
+          "System.Runtime.InteropServices": "4.3.0",
+          "System.Runtime.InteropServices.RuntimeInformation": "4.3.0"
+        },
+        "runtime": {
+          "lib/netcoreapp1.1/Serilog.Sinks.Console.dll": {
+            "assemblyVersion": "3.1.1.0",
+            "fileVersion": "3.1.1.0"
+          }
+        }
+      },
+      "Serilog.Sinks.File/4.1.0": {
+        "dependencies": {
+          "Serilog": "2.10.0",
+          "System.IO.FileSystem": "4.3.0",
+          "System.Text.Encoding.Extensions": "4.3.0",
+          "System.Threading.Timer": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Serilog.Sinks.File.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "4.1.0.0"
+          }
+        }
+      },
       "SSH.NET/2016.1.0": {
         "dependencies": {
           "Microsoft.CSharp": "4.0.1",
@@ -1308,15 +1354,7 @@
           }
         }
       },
-      "Crawler.Entity/1.0.0": {
-        "dependencies": {
-          "FreeSql": "2.0.103"
-        },
-        "runtime": {
-          "Crawler.Entity.dll": {}
-        }
-      },
-      "Crawler.Net/1.0.0": {
+      "Crawler.Net/0.0.1": {
         "dependencies": {
           "FreeSql": "2.0.103",
           "HtmlAgilityPack": "1.11.28",
@@ -1328,19 +1366,14 @@
           "Microsoft.Extensions.Http": "5.0.0",
           "Microsoft.Extensions.Logging": "5.0.0",
           "Newtonsoft.Json": "12.0.3",
+          "Serilog": "2.10.0",
+          "Serilog.Extensions.Logging": "3.0.1",
+          "Serilog.Sinks.Console": "3.1.1",
+          "Serilog.Sinks.File": "4.1.0",
           "jieba.NET": "0.42.2"
         },
         "runtime": {
           "Crawler.Net.dll": {}
-        }
-      },
-      "Crawler.Storage/1.0.0": {
-        "dependencies": {
-          "Crawler.Entity": "1.0.0",
-          "Crawler.Net": "1.0.0"
-        },
-        "runtime": {
-          "Crawler.Storage.dll": {}
         }
       }
     }
@@ -1700,6 +1733,34 @@
       "sha512": "sha512-VB5cn/7OzUfzdnC8tqAIMQciVLiq2epm2NrAm1E9OjNRyG4lVhfR61SMcLizejzQP8R8Uf/0l5qOIbUEi+RdEg==",
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "hashPath": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512"
+    },
+    "Serilog/2.10.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+QX0hmf37a0/OZLxM3wL7V6/ADvC1XihXN4Kq/p6d8lCPfgkRdiuhbWlMaFjR9Av0dy5F0+MBeDmDdRZN/YwQA==",
+      "path": "serilog/2.10.0",
+      "hashPath": "serilog.2.10.0.nupkg.sha512"
+    },
+    "Serilog.Extensions.Logging/3.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-U0xbGoZuxJRjE3C5vlCfrf9a4xHTmbrCXKmaA14cHAqiT1Qir0rkV7Xss9GpPJR3MRYH19DFUUqZ9hvWeJrzdQ==",
+      "path": "serilog.extensions.logging/3.0.1",
+      "hashPath": "serilog.extensions.logging.3.0.1.nupkg.sha512"
+    },
+    "Serilog.Sinks.Console/3.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-56mI5AqvyF/i/c2451nvV71kq370XOCE4Uu5qiaJ295sOhMb9q3BWwG7mWLOVSnmpWiq0SBT3SXfgRXGNP6vzA==",
+      "path": "serilog.sinks.console/3.1.1",
+      "hashPath": "serilog.sinks.console.3.1.1.nupkg.sha512"
+    },
+    "Serilog.Sinks.File/4.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-U0b34w+ZikbqWEZ3ui7BdzxY/19zwrdhLtI3o6tfmLdD3oXxg7n2TZJjwCCTlKPgRuYic9CBWfrZevbb70mTaw==",
+      "path": "serilog.sinks.file/4.1.0",
+      "hashPath": "serilog.sinks.file.4.1.0.nupkg.sha512"
     },
     "SSH.NET/2016.1.0": {
       "type": "package",
@@ -2219,17 +2280,7 @@
       "path": "system.xml.xpath.xmldocument/4.0.1",
       "hashPath": "system.xml.xpath.xmldocument.4.0.1.nupkg.sha512"
     },
-    "Crawler.Entity/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Crawler.Net/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Crawler.Storage/1.0.0": {
+    "Crawler.Net/0.0.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

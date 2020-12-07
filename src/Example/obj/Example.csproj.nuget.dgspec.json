@@ -5,7 +5,7 @@
   },
   "projects": {
     "C:\\Users\\cx\\Desktop\\github\\Crawler.Net\\src\\Crawler.Net\\Crawler.Net.csproj": {
-      "version": "1.0.0",
+      "version": "0.0.2",
       "restore": {
         "projectUniqueName": "C:\\Users\\cx\\Desktop\\github\\Crawler.Net\\src\\Crawler.Net\\Crawler.Net.csproj",
         "projectName": "Crawler.Net",
@@ -83,6 +83,22 @@
               "target": "Package",
               "version": "[12.0.3, )"
             },
+            "Serilog": {
+              "target": "Package",
+              "version": "[2.10.0, )"
+            },
+            "Serilog.Extensions.Logging": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
             "jieba.NET": {
               "target": "Package",
               "version": "[0.42.2, )"
@@ -124,15 +140,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "net5.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {
               "C:\\Users\\cx\\Desktop\\github\\Crawler.Net\\src\\Crawler.Net\\Crawler.Net.csproj": {
                 "projectPath": "C:\\Users\\cx\\Desktop\\github\\Crawler.Net\\src\\Crawler.Net\\Crawler.Net.csproj"
@@ -147,8 +163,8 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "FreeSql": {
               "target": "Package",

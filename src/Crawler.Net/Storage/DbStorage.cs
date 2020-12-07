@@ -29,7 +29,7 @@ namespace Crawler.Net.Storage
             var any = await freeSql.Select<CrawlerTasks>().Where(a => a.Url == task.Url && a.ReqName == task.TagName).AnyAsync();
             if (!any)
             {
-                await freeSql.Insert(new CrawlerTasks() { CreateTime = DateTime.Now, Url = task.Url, ReqName = task.TagName }).ExecuteInsertedAsync();
+                await freeSql.Insert(new CrawlerTasks() { CreateTime = DateTime.Now, Url = task.Url, ReqName = task.TagName }).ExecuteAffrowsAsync();
             }
         }
 
@@ -39,24 +39,27 @@ namespace Crawler.Net.Storage
             {
                 Url = url,
                 ReqNqme = reqName
-            }).ExecuteInsertedAsync();
+            }).ExecuteAffrowsAsync();
         }
 
         public async Task SaveUrlToDbAsync(string url)
         {
-            await freeSql.Insert<CrawlerHistorys>(new CrawlerHistorys()
+            await freeSql.Insert(new CrawlerHistorys()
             {
                 Url = url,
                 CreateTime = DateTime.Now
 
-            }).ExecuteInsertedAsync();
+            }).ExecuteAffrowsAsync();
         }
 
         public async Task<IEnumerable<TaskEntity>> TakeTaskAsync(int count)
         {
             var tasks = await freeSql.Select<CrawlerTasks>().Take(count).ToListAsync();
             var ids = tasks.Select(a => a.Id).ToArray();
-            await freeSql.Delete<CrawlerTasks>().Where(a => ids.Contains(a.Id)).ExecuteDeletedAsync();
+            if (ids.Length > 0)
+            {
+                await freeSql.Delete<CrawlerTasks>().Where(a => ids.Contains(a.Id)).ExecuteDeletedAsync();
+            }
             return tasks.Select(a => new TaskEntity()
             {
                 TagName = a.ReqName,
