@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "DkkCzdeRDhnRN7AV3VZGgwKSt8fSoAPz5O+HkbVKpxiT9QA+Vs+rUGCCVq9ZHhgcL0oHjZWGcKzszNNSZb6vmQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\cx\\Desktop\\github\\Crawler.Net\\src\\Crawler.Entity\\Crawler.Entity.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cx\\.nuget\\packages\\freesql\\2.0.103\\freesql.2.0.103.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

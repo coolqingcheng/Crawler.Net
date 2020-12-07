@@ -1,0 +1,8 @@
+{
+  "mysql": "Data Source=127.0.0.1;Port=3306;User ID=chenxin;Password=chenxin;Initial Catalog=SpiderDb12;Charset=utf8;SslMode=none;Max pool size=10",
+  "spider": {
+    "reqnum": 5,
+    "respnum": 5,
+    "puase": 2000
+  }
+}

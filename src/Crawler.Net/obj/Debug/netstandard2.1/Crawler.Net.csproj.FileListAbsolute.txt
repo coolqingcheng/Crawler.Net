@@ -1,0 +1,9 @@
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Net\obj\Debug\netstandard2.1\Crawler.Net.AssemblyInfoInputs.cache
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Net\obj\Debug\netstandard2.1\Crawler.Net.AssemblyInfo.cs
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Net\obj\Debug\netstandard2.1\Crawler.Net.csproj.CoreCompileInputs.cache
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Net\bin\Debug\netstandard2.1\Crawler.Net.deps.json
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Net\bin\Debug\netstandard2.1\Crawler.Net.dll
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Net\bin\Debug\netstandard2.1\Crawler.Net.pdb
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Net\obj\Debug\netstandard2.1\Crawler.Net.dll
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Net\obj\Debug\netstandard2.1\Crawler.Net.pdb
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Net\obj\Debug\netstandard2.1\Crawler.Net.csprojAssemblyReference.cache

@@ -1,0 +1,75 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\cx\\Desktop\\github\\Crawler.Net\\src\\Crawler.Net.MySql\\Crawler.Net.MySql.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\cx\\Desktop\\github\\Crawler.Net\\src\\Crawler.Net.MySql\\Crawler.Net.MySql.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\cx\\Desktop\\github\\Crawler.Net\\src\\Crawler.Net.MySql\\Crawler.Net.MySql.csproj",
+        "projectName": "Crawler.Net.MySql",
+        "projectPath": "C:\\Users\\cx\\Desktop\\github\\Crawler.Net\\src\\Crawler.Net.MySql\\Crawler.Net.MySql.csproj",
+        "packagesPath": "C:\\Users\\cx\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\cx\\Desktop\\github\\Crawler.Net\\src\\Crawler.Net.MySql\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\cx\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "FreeSql": {
+              "target": "Package",
+              "version": "[2.0.103, )"
+            },
+            "FreeSql.Provider.MySql": {
+              "target": "Package",
+              "version": "[2.0.103, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

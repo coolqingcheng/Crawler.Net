@@ -1,0 +1,14 @@
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\bin\Debug\netstandard2.1\Crawler.Storage.deps.json
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\bin\Debug\netstandard2.1\Crawler.Storage.dll
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\bin\Debug\netstandard2.1\Crawler.Storage.pdb
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\bin\Debug\netstandard2.1\Crawler.Net.dll
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\bin\Debug\netstandard2.1\Crawler.Net.pdb
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\obj\Debug\netstandard2.1\Crawler.Storage.csprojAssemblyReference.cache
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\obj\Debug\netstandard2.1\Crawler.Storage.AssemblyInfoInputs.cache
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\obj\Debug\netstandard2.1\Crawler.Storage.AssemblyInfo.cs
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\obj\Debug\netstandard2.1\Crawler.Storage.csproj.CoreCompileInputs.cache
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\obj\Debug\netstandard2.1\Crawler.Storage.csproj.CopyComplete
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\obj\Debug\netstandard2.1\Crawler.Storage.dll
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\obj\Debug\netstandard2.1\Crawler.Storage.pdb
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\bin\Debug\netstandard2.1\Crawler.Entity.dll
+C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Storage\bin\Debug\netstandard2.1\Crawler.Entity.pdb
