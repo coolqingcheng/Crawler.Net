@@ -1,9 +1,0 @@
-C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Entity\bin\Debug\netstandard2.0\Crawler.Entity.deps.json
-C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Entity\bin\Debug\netstandard2.0\Crawler.Entity.dll
-C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Entity\bin\Debug\netstandard2.0\Crawler.Entity.pdb
-C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Entity\obj\Debug\netstandard2.0\Crawler.Entity.csprojAssemblyReference.cache
-C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Entity\obj\Debug\netstandard2.0\Crawler.Entity.AssemblyInfoInputs.cache
-C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Entity\obj\Debug\netstandard2.0\Crawler.Entity.AssemblyInfo.cs
-C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Entity\obj\Debug\netstandard2.0\Crawler.Entity.csproj.CoreCompileInputs.cache
-C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Entity\obj\Debug\netstandard2.0\Crawler.Entity.dll
-C:\Users\cx\Desktop\github\Crawler.Net\src\Crawler.Entity\obj\Debug\netstandard2.0\Crawler.Entity.pdb
